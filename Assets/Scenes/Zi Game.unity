@@ -1045,6 +1045,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 3652961014490748020, guid: 095f424fc2eb2db419483c7ac509217f, type: 3}
   spawnManager: {fileID: 619897096}
   powerupIndicator: 0
+  bulletIndicator: 1
+  polliceIndicator: 1
 --- !u!1 &1542120213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Restart game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8abe1e37fe7bf433896970245b936749, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
