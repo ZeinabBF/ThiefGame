@@ -20,12 +20,11 @@ public class PlayerController : MonoBehaviour
     public bool bulletIndicator = true;
     public bool polliceIndicator = true;
     private float interval = 4;
-    //private Animator playerAnim;
-    //public ParticleSystem explosionParticle;
-    //public ParticleSystem dirtParticle;
-    //public AudioClip jumpSound;
-    // public AudioClip crashSound;
-    //private AudioSource playerAudio;
+    private Animator playerAnim;
+    public ParticleSystem explosionParticle;
+    public AudioClip goldSound;
+    public AudioClip bulletSound;
+    private AudioSource playerAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +32,9 @@ public class PlayerController : MonoBehaviour
         Physics.gravity *= gravityModifier;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        playerAudio = GetComponent<AudioSource>();
+        playerAnim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -94,15 +96,17 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(NextLevelCoroutine());
             polliceIndicator = false;
-
+            playerAudio.PlayOneShot(goldSound, 1.0f);
         }
         else if (other.CompareTag("Enemy"))
         {
             gameOver = true;
             gameManager.GameOver();
+            explosionParticle.Play();
             Destroy(other.gameObject);
-
-
+            playerAudio.PlayOneShot(bulletSound, 1.0f);
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetInteger("DeathType_int", 1);
         }
         else if (other.CompareTag("Ground"))
         {
