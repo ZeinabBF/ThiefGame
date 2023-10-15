@@ -33,25 +33,18 @@ public class PlayerController : MonoBehaviour
         Physics.gravity *= gravityModifier;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-        //playerAnim = GetComponent<Animator>();
-        //playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Allow the player to jump
-        // if (!gameOver)
-        // {
         inbounds();
         if (!gameOver)
         {
             move();
             jump();
         }
-
-
-
     }
 
     void inbounds()
@@ -80,7 +73,6 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.back * horizontalInput * movementSpeed * Time.deltaTime);
         float verticalInput = Input.GetAxis("Vertical");
-        //transform.Translate(Vector3.right * verticalInput * movementSpeed * Time.deltaTime);
         //Allow the player to rotate
         transform.Rotate(Vector3.up, verticalInput * turnSpeed * Time.deltaTime);
     }
@@ -90,9 +82,6 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
-            //playerAnim.SetTrigger("Jump_trig");
-            //dirtParticle.Stop();
-            //playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
     }
 
@@ -111,11 +100,6 @@ public class PlayerController : MonoBehaviour
         {
             gameOver = true;
             gameManager.GameOver();
-            //playerAnim.SetBool("Death_b", true);
-            //  playerAnim.SetInteger("DeathType_int", 1);
-            //explosionParticle.Play();
-            //   dirtParticle.Stop();
-            //  playerAudio.PlayOneShot(crashSound, 1.0f);
             Destroy(other.gameObject);
 
 
@@ -123,7 +107,6 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Ground"))
         {
             isOnGround = true;
-            // dirtParticle.Play();
         }
     }
 
@@ -131,7 +114,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(interval);
         spawnManager.powerupIndicator = true;
-        polliceIndicator = true;
+
     }
 }
 

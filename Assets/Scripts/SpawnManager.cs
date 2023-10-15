@@ -44,9 +44,18 @@ public class SpawnManager : MonoBehaviour
         Instantiate(pollicePrefab, polliceSpawnPos, pollicePrefab.transform.rotation);
         BulletSpawn(bulletSpawnPos); // Pass polliceSpawnPos to BulletSpawn
 
+    }
 
-
-
+    void PolliceWave(int polliceToSpawn)
+    {
+        for (int i = 0; i < polliceToSpawn; i++)
+        {
+            Vector3 polliceSpawnPos = new Vector3(UnityEngine.Random.Range(-polliceRangeX, polliceRangeX), polliceSpawnPosY, UnityEngine.Random.Range(-polliceRangeZ, polliceRangeZ));
+            Vector3 offset = new Vector3(bulletSpawnPosX, bulletSpawnPosY, 0);
+            Vector3 bulletSpawnPos = polliceSpawnPos + offset;
+            Instantiate(pollicePrefab, polliceSpawnPos, pollicePrefab.transform.rotation);
+            BulletSpawn(bulletSpawnPos); // Pass polliceSpawnPos to BulletSpawn
+        }
     }
 
     void BulletSpawn(Vector3 bulletSpawnPos) // Accept spawnPos as a parameter
@@ -72,7 +81,7 @@ public class SpawnManager : MonoBehaviour
             {
                 powerupIndicator = false;
                 GoldSpawn();
-                PolliceSpawn();  //changed
+                PolliceWave(polliceWaveNum);
                 StartCoroutine(WaitForVariableChange());
                 polliceWaveNum++;
             }
@@ -93,4 +102,3 @@ public class SpawnManager : MonoBehaviour
 
 
 }
-

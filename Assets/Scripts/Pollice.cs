@@ -25,7 +25,7 @@ public class Pollice : MonoBehaviour
         if (playerControllerScript.gameOver || !playerControllerScript.polliceIndicator)
         {
             Destroy(gameObject);
-
+            playerControllerScript.polliceIndicator = true;
         }
     }
 
